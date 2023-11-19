@@ -26,12 +26,13 @@ function Home({
   Romance,
   Documentaries,
 }: props) {
+  console.log(TopRated)
   return (
     <>
       <Head>
         <title>Home</title>
       </Head>
-      <div className="px-10 py-4">
+      <div className="">
         <Header />
         <Banner TopRated={TopRated}/>
       </div>

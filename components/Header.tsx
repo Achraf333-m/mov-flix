@@ -1,16 +1,22 @@
+import logo from '@/public/Logo.png'
+import Image from 'next/image';
+
+
 function Header() {
   return (
-    <div className="flex space-x-16 px-8 py-8">
-      <div className="flex space-x-16">
-        <img src="https://rb.gy/ulxxee" width={100} height={100} alt="logo" />
+    <nav className="flex items-center space-x-16 px-8 py-8 bg-transparent">
+      <div className="flex items-center space-x-16">
+        <Image className='h-auto w-auto' src={logo} width={100} height={100} alt="logo" />
         <ul className="flex space-x-4">
-          <li className="hover:opacity-40 cursor-pointer">Movies</li>
-          <li className="hover:opacity-40 cursor-pointer">Series</li>
+          <li className="nav-link">Movies</li>
+          <li className="nav-link">Series</li>
+          <li className="nav-link">Documentaries</li>
+          <li className="nav-link">Tv</li>
         </ul>
       </div>
       {/* insert the logo for user here */}
-    </div>
+    </nav>
   );
 }
 
-export default Header;
+export default Header
