@@ -1,5 +1,6 @@
 import Banner from "@/components/Banner";
 import Header from "@/components/Header";
+import Row from "@/components/Row";
 import { Movie } from "@/typings";
 import links from "@/utils/links";
 import { GetServerSideProps } from "next";
@@ -26,23 +27,25 @@ function Home({
   Romance,
   Documentaries,
 }: props) {
-  console.log(TopRated)
   return (
-    <>
+    <div className="relative h-screen overflow-x-hidden lg:h-[140vh]">
       <Head>
         <title>Home</title>
       </Head>
-      <div className="">
-        <Header />
-        <Banner TopRated={TopRated}/>
-      </div>
-    </>
+      <Header />
+      <main className="">
+        <Banner Trending={Trending} />
+        <section>
+          {/* <Row /> */}
+        </section>
+      </main>
+    </div>
   );
 }
 
 export default Home;
 
-export const getServerSideProps:GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const [
     Trending,
     Originals,
