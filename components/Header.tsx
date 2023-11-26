@@ -28,7 +28,7 @@ function Header() {
     <nav
       className={`${
         scrolled && "bg-black/70"
-      } fixed top-0 left-0 right-0 z-10 transition-all duration-500 flex items-center space-x-16 px-8 py-8 bg-transparent`}
+      } fixed top-0 left-0 right-0 z-10 transition-all duration-500 flex items-center space-x-16 px-8 py-8`}
     >
       <div className="flex items-center space-x-16">
         <Image

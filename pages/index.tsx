@@ -28,15 +28,19 @@ function Home({
   Documentaries,
 }: props) {
   return (
-    <div className="relative h-screen overflow-x-hidden lg:h-[140vh]">
+    <div className="relative bg-gradient-to-b overflow-x-hidden">
       <Head>
         <title>Home</title>
       </Head>
       <Header />
-      <main className="">
+      <main className="px-4 lg:space-y-24 lg:px-16 relative pb-24">
         <Banner Trending={Trending} />
         <section>
-          {/* <Row /> */}
+          <Row />
+          <Row />
+          <Row />
+          <Row />
+          <Row />
         </section>
       </main>
     </div>

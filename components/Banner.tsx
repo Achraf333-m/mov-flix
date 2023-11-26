@@ -19,15 +19,17 @@ function Banner({ Trending }: props) {
   }, [Trending]);
 
   return (
-    <div className="w-full h-full">
-      <img
-        className="absolute opacity-70 object-fit top-0 left-0 w-screen h-[95vh] -z-10"
-        src={`${imgUrl}${Movie?.backdrop_path || Movie?.poster_path}`}
-        alt=""
-      />
+    <div className="flex flex-col py-16 space-y-2 mb-10 md:justify-end md:space-y-4 lg:h-[85vh] lg:pb-12">
+      <figure className="absolute top-0 left-0 h-[95vh] w-screen -z-10">
+        <img
+          className=" opacity-50 object-cover -z-10"
+          src={`${imgUrl}${Movie?.backdrop_path || Movie?.poster_path}`}
+          alt=""
+        />
+      </figure>
 
-      <div className="p-20 absolute top-[30%] bottom-[70%] flex flex-col space-y-6 justify-center items-center">
-        <h1 className="text-[50px] font-light " >{Movie?.title}</h1>
+      <div className=" flex flex-col space-y-6 justify-items-end items-center">
+        <h1 className="text-[50px] font-light ">{Movie?.title || Movie?.original_name}</h1>
         <div className="flex space-x-4">
           <button className="btn">
             {" "}
@@ -48,7 +50,9 @@ function Banner({ Trending }: props) {
             {Movie && Math.floor(Movie?.vote_count / 100)} watchers
           </h3>
         </div>
-        <p className="text-center max-w-xs font-extralight text-lg text-ellipsis">{Movie?.overview}</p>
+        <p className="text-center max-w-xs font-extralight text-lg text-ellipsis">
+          {Movie?.overview}
+        </p>
       </div>
     </div>
   );
