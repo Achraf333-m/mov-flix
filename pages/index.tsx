@@ -1,4 +1,6 @@
 import Banner from "@/components/Banner";
+import BasicModal from "@/components/Modal";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Row from "@/components/Row";
 import { Movie } from "@/typings";
@@ -28,21 +30,26 @@ function Home({
   Documentaries,
 }: props) {
   return (
-    <div className="relative bg-gradient-to-b overflow-x-hidden">
+    <div className="relative !bg-gradient-to-b box-border ">
       <Head>
         <title>Home</title>
       </Head>
       <Header />
-      <main className="px-4 lg:space-y-24 lg:px-16 relative pb-24">
+      <main className="px-4 lg:space-y-16 lg:px-8 relative pb-24">
         <Banner Trending={Trending} />
         <section>
-          <Row />
-          <Row />
-          <Row />
-          <Row />
-          <Row />
+          <Row title="MovieFLix Originals" Movies={Originals} />
+          <Row title="Top Rated Movies" Movies={TopRated} />
+          {/* my list */}
+          <Row title="Action Movies" Movies={Action} />
+          <Row title="Comedy Movies" Movies={Comedy} />
+          <Row title="Horror Movies" Movies={Horror} />
+          <Row title="Romance Movies" Movies={Romance} />
+          <Row title="Documentaries" Movies={Documentaries} />
         </section>
+        <BasicModal />
       </main>
+      <Footer />
     </div>
   );
 }

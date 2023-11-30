@@ -11,26 +11,35 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
+    --background-start-rgb: 0, 20, 0;
   }
 }
 
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
-      to bottom,
+      to right,
       transparent,
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
 }
 
+@layer base {
+  body {
+    @apply bg-[#141414] text-white w-screen overflow-x-hidden !scrollbar-thumb-rounded !scrollbar-thin !scrollbar-track-transparent !scrollbar-thumb-green-800;
+  }
+}
+
 @layer components {
   .nav-link {
-    @apply hover:opacity-70 cursor-pointer text-green-500 text-lg
+    @apply hover:opacity-70 cursor-pointer text-green-500 text-lg;
   }
   .btn {
-    @apply flex items-center gap-x-2 bg-green-500/70 rounded font-semibold text-sm px-5 py-1.5 md:px-8 md:py-2.5 md:text-xl hover:opacity-80
+    @apply flex items-center gap-x-2 bg-green-500/70 rounded font-semibold text-sm px-5 py-1.5 md:px-8 md:py-2.5 md:text-xl hover:opacity-80;
+  }
+  .arRow {
+    @apply rounded-full hover:bg-gray-50/10 p-8 text-lg absolute
   }
 }

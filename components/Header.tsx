@@ -1,6 +1,7 @@
 import logo from "@/public/Logo.png";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { MdOutlineManageAccounts } from 'react-icons/md'
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -27,12 +28,12 @@ function Header() {
   return (
     <nav
       className={`${
-        scrolled && "bg-black/70"
+        scrolled && "bg-black/90"
       } fixed top-0 left-0 right-0 z-10 transition-all duration-500 flex items-center space-x-16 px-8 py-8`}
     >
-      <div className="flex items-center space-x-16">
+      <div className="flex items-center justify-around space-x-4 w-full">
         <Image
-          className="h-auto w-auto"
+          className="h-auto w-auto cursor-pointer"
           src={logo}
           width={100}
           height={100}
@@ -43,9 +44,12 @@ function Header() {
           <li className="nav-link">Series</li>
           <li className="nav-link">Documentaries</li>
           <li className="nav-link">Tv</li>
+          <li className="nav-link">New!</li>
+          <li className="nav-link">Kids</li>
+          <li className="nav-link">Movie Night</li>
         </ul>
+        <MdOutlineManageAccounts className="w-10 h-10 cursor-pointer nav-link" />
       </div>
-      {/* insert the logo for user here */}
     </nav>
   );
 }
