@@ -1,8 +1,8 @@
-import { modalState } from "@/atoms/atom";
+import { modalState, movieState } from "@/atoms/atom";
 import { imgUrl } from "@/constants/url";
 import { Movie } from "@/typings";
 import { trailer } from "@/utils/trailer";
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useResetRecoilState } from 'recoil'
 
 interface props {
     Movie: Movie
@@ -10,9 +10,10 @@ interface props {
 
 function Thumbnail({ Movie }:props) {
     const [showTrailer, setShowTrailer] = useRecoilState(modalState)
+    const [movieTrailer, setmovieTrailer] = useRecoilState(movieState)
     const show_trailer = async() => {
         const data = await trailer(Movie.id)
-        console.log(data)
+        setmovieTrailer(data)
     }
     return (
         <figure onClick={() => {setShowTrailer(true), show_trailer()} } className="h-40 w-72 flex-shrink-0 hover:scale-[102%] cursor-pointer">

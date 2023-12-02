@@ -37,7 +37,7 @@ function Home({
       <Header />
       <main className="px-4 lg:space-y-16 lg:px-8 relative pb-24">
         <Banner Trending={Trending} />
-        <section>
+        <section className="pl-10">
           <Row title="MovieFLix Originals" Movies={Originals} />
           <Row title="Top Rated Movies" Movies={TopRated} />
           {/* my list */}

@@ -4,8 +4,9 @@ import { imgUrl } from "@/constants/url";
 import { FaPlay } from "react-icons/fa";
 import { RiMovie2Fill } from "react-icons/ri";
 import { LuPopcorn } from "react-icons/lu";
-import { modalState } from "@/atoms/atom";
+import { modalState, movieState } from "@/atoms/atom";
 import { useRecoilState } from 'recoil'
+import { trailer } from "@/utils/trailer";
 
 interface props {
   Trending: Movie[];
@@ -14,6 +15,11 @@ interface props {
 function Banner({ Trending }: props) {
   const [Movie, setMovie] = useState<Movie | null>(null);
   const [showTrailer, setShowTrailer] = useRecoilState(modalState)
+  const [movieTrailer, setmovieTrailer] = useRecoilState(movieState)
+    const show_trailer = async() => {
+        const data = await trailer(Movie?.id!)
+        setmovieTrailer(data)
+    }
 
   useEffect(() => {
     setTimeout(() => {
@@ -32,14 +38,14 @@ function Banner({ Trending }: props) {
       </figure>
 
       <div className=" flex justify-center items-center max-w-md flex-col space-y-6">
-        <h1 className="text-[50px] font-light ">{Movie?.title || Movie?.original_name}</h1>
+        <h1 className="text-[50px] font-light text-center">{Movie?.title || Movie?.original_name}</h1>
         <div className="flex space-x-4">
           <button className="btn">
             {" "}
             <FaPlay className="w-4 h-4  md:h-7 md:w-7" />
             Play
           </button>
-          <button onClick={() => setShowTrailer(true)} className="btn">
+          <button onClick={() => {setShowTrailer(true), show_trailer()}} className="btn">
             <RiMovie2Fill className="w-4 h-4  md:h-7 md:w-7" />
             Trailer
           </button>
