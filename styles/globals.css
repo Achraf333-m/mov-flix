@@ -42,4 +42,7 @@ body {
   .arRow {
     @apply rounded-full hover:bg-gray-50/10 p-8 text-lg absolute
   }
+  input::placeholder {
+    @apply text-white text-center opacity-40
+  }
 }

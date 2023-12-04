@@ -7,6 +7,8 @@ import { Movie } from "@/typings";
 import links from "@/utils/links";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
+import useFireAuth from "@/custom_hooks/useFireAuth";
+import { useEffect } from "react";
 
 interface props {
   Trending: Movie[];
@@ -29,6 +31,12 @@ function Home({
   Romance,
   Documentaries,
 }: props) {
+  const { user } = useFireAuth()
+
+  if (!user) {
+    return null
+  }
+  
   return (
     <div className="relative !bg-gradient-to-b box-border ">
       <Head>
