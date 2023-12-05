@@ -17,9 +17,11 @@ function account() {
           className="absolute opacity-40 -z-20 w-full h-full object-cover"
         />
         <div className="p-36 space-y-10">
-          <Link href="/" className="absolute top-0 left-0 p-20">
-            <MdArrowBackIos className="text-xl" />
-          </Link>
+          <div className="absolute top-0 left-0 p-20">
+            <Link href="/">
+              <MdArrowBackIos className="text-xl" />
+            </Link>
+          </div>
           <h1 className="text-5xl text-white/70">My Account</h1>
           <div className="flex justify-evenly space-x-4">
             <ul className="space-y-4 text-lg underline cursor-pointer text-white/60">
