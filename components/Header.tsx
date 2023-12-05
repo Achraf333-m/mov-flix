@@ -43,13 +43,13 @@ function Header() {
           />
         </Link>
         <ul className="flex space-x-4">
-          <li className="nav-link">Movies</li>
-          <li className="nav-link">Series</li>
-          <li className="nav-link">Documentaries</li>
-          <li className="nav-link">Tv</li>
-          <li className="nav-link">New!</li>
-          <li className="nav-link">Kids</li>
-          <li className="nav-link">Movie Night</li>
+          <li onClick={() => alert('This feature has not been implemented yet :D')} className="nav-link">Movies</li>
+          <li onClick={() => alert('This feature has not been implemented yet :D')} className="nav-link">Series</li>
+          <li onClick={() => alert('This feature has not been implemented yet :D')} className="nav-link">Documentaries</li>
+          <li onClick={() => alert('This feature has not been implemented yet :D')} className="nav-link">Tv</li>
+          <li onClick={() => alert('This feature has not been implemented yet :D')} className="nav-link">New!</li>
+          <li onClick={() => alert('This feature has not been implemented yet :D')} className="nav-link">Kids</li>
+          <li onClick={() => alert('This feature has not been implemented yet :D')} className="nav-link">Movie Night</li>
         </ul>
         <Link href="/account">
           <MdOutlineManageAccounts className="w-10 h-10 cursor-pointer nav-link" />

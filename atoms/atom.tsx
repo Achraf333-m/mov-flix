@@ -1,4 +1,4 @@
-
+import { Movie } from '@/typings';
 import { atom } from 'recoil'
 
 export const modalState = atom({
@@ -9,4 +9,9 @@ export const modalState = atom({
 export const movieState = atom({
     key: 'movieState',
     default: ''
+  });
+
+export const VideoState = atom({
+    key: 'videoState',
+    default: {} as Movie | null
   });

@@ -4,8 +4,8 @@ import { imgUrl } from "@/constants/url";
 import { FaPlay } from "react-icons/fa";
 import { RiMovie2Fill } from "react-icons/ri";
 import { LuPopcorn } from "react-icons/lu";
-import { modalState, movieState } from "@/atoms/atom";
-import { useRecoilState } from 'recoil'
+import { VideoState, modalState, movieState } from "@/atoms/atom";
+import { useRecoilState } from "recoil";
 import { trailer } from "@/utils/trailer";
 
 interface props {
@@ -14,12 +14,14 @@ interface props {
 
 function Banner({ Trending }: props) {
   const [Movie, setMovie] = useState<Movie | null>(null);
-  const [showTrailer, setShowTrailer] = useRecoilState(modalState)
-  const [movieTrailer, setmovieTrailer] = useRecoilState(movieState)
-    const show_trailer = async() => {
-        const data = await trailer(Movie?.id!)
-        setmovieTrailer(data)
-    }
+  const [showTrailer, setShowTrailer] = useRecoilState(modalState);
+  const [movieTrailer, setmovieTrailer] = useRecoilState(movieState);
+  const [videoState, setVideoState] = useRecoilState(VideoState);
+  const show_trailer = async () => {
+    const data = await trailer(Movie?.id!, Movie?.media_type);
+    setmovieTrailer(data);
+    setVideoState(Movie);
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -30,22 +32,29 @@ function Banner({ Trending }: props) {
   return (
     <div className="flex flex-col py-16 space-y-2 mb-10 md:justify-end md:space-y-4 lg:h-[85vh] lg:pb-12">
       <figure className="absolute top-0 left-0 h-[95vh] w-full -z-10">
-        <img
+       {Movie && ( <img
           className=" opacity-50 object-cover -z-10"
           src={`${imgUrl}${Movie?.backdrop_path || Movie?.poster_path}`}
           alt=""
-        />
+        />)}
       </figure>
 
       <div className=" flex justify-center items-center max-w-md flex-col space-y-6">
-        <h1 className="text-[50px] font-light text-center">{Movie?.title || Movie?.original_name}</h1>
+        <h1 className="text-[50px] font-light text-center">
+          {Movie?.title || Movie?.original_name}
+        </h1>
         <div className="flex space-x-4">
-          <button className="btn">
+          <button className="btn" onClick={() => alert('As this is a mock website, I can only show you the trailers, sorry :D')}>
             {" "}
             <FaPlay className="w-4 h-4  md:h-7 md:w-7" />
             Play
           </button>
-          <button onClick={() => {setShowTrailer(true), show_trailer()}} className="btn">
+          <button
+            onClick={() => {
+              setShowTrailer(true), show_trailer();
+            }}
+            className="btn"
+          >
             <RiMovie2Fill className="w-4 h-4  md:h-7 md:w-7" />
             Trailer
           </button>

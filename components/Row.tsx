@@ -2,9 +2,10 @@ import { Movie } from "@/typings";
 import Thumbnail from "./Thumbnail";
 import { useRef } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import { DocumentData } from "firebase/firestore";
 
 interface props {
-  Movies: Movie[];
+  Movies: Movie[] | DocumentData;
   title: String;
 }
 
@@ -38,8 +39,8 @@ function Row({ Movies, title }: props) {
           ref={movedRef}
           className="flex space-x-2 overflow-x-scroll scrollbar-hide items-center"
         >
-          {Movies.map((original) => (
-            <Thumbnail Movie={original} key={original.backdrop_path} />
+          {Movies.map((original:Movie) => (
+            <Thumbnail Movie={original} key={original.id} />
           ))}
         </div>
       </div>

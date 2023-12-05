@@ -24,10 +24,8 @@ function AuthPage({ title }: props) {
   } = useForm<infos>();
   const formSubmit: SubmitHandler<infos> = async({ email, password }) => {
     if (router.pathname === '/signIn') {
-        console.log(router.pathname)
         await signUserIn(email, password)
     } else if (router.pathname === '/signUp') {
-        console.log(router.pathname)
         await signUserUp(email, password)
     } else {
         return null

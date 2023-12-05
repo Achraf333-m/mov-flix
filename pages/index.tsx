@@ -9,6 +9,7 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import useFireAuth from "@/custom_hooks/useFireAuth";
 import { useEffect } from "react";
+import useLikedList from "@/custom_hooks/useLikedList";
 
 interface props {
   Trending: Movie[];
@@ -32,11 +33,11 @@ function Home({
   Documentaries,
 }: props) {
   const { user } = useFireAuth()
+  const list = useLikedList(user?.uid)
 
   if (!user) {
     return null
   }
-  
   return (
     <div className="relative !bg-gradient-to-b box-border ">
       <Head>
@@ -48,7 +49,7 @@ function Home({
         <section className="pl-10">
           <Row title="MovieFLix Originals" Movies={Originals} />
           <Row title="Top Rated Movies" Movies={TopRated} />
-          {/* my list */}
+          {list.length > 0 && <Row title="Movies I liked" Movies={list} />}
           <Row title="Action Movies" Movies={Action} />
           <Row title="Comedy Movies" Movies={Comedy} />
           <Row title="Horror Movies" Movies={Horror} />
