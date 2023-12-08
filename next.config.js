@@ -1,4 +1,3 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {}
+const withTM = require("next-transpile-modules")(["@invertase/firestore-stripe-payments"]); // pass the modules you would like to see transpiled
 
-module.exports = nextConfig
+module.exports = withTM({});

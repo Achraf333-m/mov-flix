@@ -24,10 +24,10 @@ function Row({ Movies, title }: props) {
   };
 
   return (
-    <div className="h-60 w-full space-y-0.5 md:space-y-4 ">
+    <div className="max-h-60 w-full space-y-0.5 md:space-y-4 flex-shrink ">
       <h2 className="font-light text-3xl ml-[156px]">{title}</h2>
       <div className="flex space-x-24">
-        <div className="flex px-8 justify-center space-x-28">
+        <div className="hidden md:flex px-8 justify-center space-x-28">
           <button className="arRow" onClick={() => rowMoved("left")}>
             <BsChevronLeft />
           </button>

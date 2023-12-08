@@ -8,8 +8,12 @@ import links from "@/utils/links";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import useFireAuth from "@/custom_hooks/useFireAuth";
-import { useEffect } from "react";
 import useLikedList from "@/custom_hooks/useLikedList";
+import useSubStatus from "@/custom_hooks/useSubStatus";
+import SubPlans from "@/components/SubPlans";
+import { Product } from "@invertase/firestore-stripe-payments";
+import { query, collection, where, getDocs } from "firebase/firestore";
+import { db } from "@/firebase";
 
 interface props {
   Trending: Movie[];
@@ -20,6 +24,7 @@ interface props {
   Horror: Movie[];
   Romance: Movie[];
   Documentaries: Movie[];
+  products: Product[];
 }
 
 function Home({
@@ -31,13 +36,20 @@ function Home({
   Horror,
   Romance,
   Documentaries,
+  products,
 }: props) {
-  const { user } = useFireAuth()
-  const list = useLikedList(user?.uid)
+  const { user, loading } = useFireAuth();
+  const list = useLikedList(user?.uid);
+  const subscription = useSubStatus(user);
 
   if (!user) {
-    return null
+    return null;
   }
+  console.log(subscription)
+
+  if (loading || subscription === null) return null;
+  if (!subscription) return <SubPlans products={products} user={user} />;
+
   return (
     <div className="relative !bg-gradient-to-b box-border ">
       <Head>
@@ -46,7 +58,7 @@ function Home({
       <Header />
       <main className="px-4 lg:space-y-16 lg:px-8 relative pb-24">
         <Banner Trending={Trending} />
-        <section className="pl-10">
+        <section className="md:pl-10">
           <Row title="MovieFLix Originals" Movies={Originals} />
           <Row title="Top Rated Movies" Movies={TopRated} />
           {list.length > 0 && <Row title="Movies I liked" Movies={list} />}
@@ -66,6 +78,29 @@ function Home({
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async () => {
+  // getting products and their prices
+  // create a query object
+  const q = query(collection(db, "products"), where("active", "==", true));
+
+  const querySnapshot = await getDocs(q);
+
+  // for each product, get the product price info
+  const productsPromises = querySnapshot.docs.map(async (productDoc) => {
+    let productInfo = productDoc.data();
+
+    // fetch prices subcollection per product
+    const pricesCollection = collection(productDoc.ref, "prices");
+    const priceQuerySnapshot = await getDocs(pricesCollection);
+
+    // assume there is only one price per product
+    const priceDoc = priceQuerySnapshot.docs[0];
+    productInfo["priceId"] = priceDoc.id;
+    productInfo["priceInfo"] = priceDoc.data();
+    return productInfo;
+  });
+
+  // 'products' is an array of products (including price info)
+  const products = await Promise.all(productsPromises);
   const [
     Trending,
     Originals,
@@ -96,6 +131,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       Horror: Horror.results || null,
       Romance: Romance.results || null,
       Documentaries: Documentaries.results || null,
+      products: products || null,
     },
   };
 };

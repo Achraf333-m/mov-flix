@@ -58,7 +58,7 @@ function account() {
                 My subscription
               </li>
             </ul>
-            <div className="h-52 w-1 border-2 border-white/50"></div>
+            <div className="h-52 w-1 bg-white/50 rounded-full"></div>
             <ul className="space-y-4 text-lg cursor-pointer text-white/60">
               <li
                 onClick={() =>

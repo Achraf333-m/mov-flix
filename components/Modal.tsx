@@ -10,26 +10,30 @@ import { FaThumbsUp } from "react-icons/fa";
 import useFireAuth from "@/custom_hooks/useFireAuth";
 import {
   DocumentData,
+  Firestore,
   collection,
   deleteDoc,
   doc,
   onSnapshot,
   setDoc,
 } from "firebase/firestore";
-import { db } from "@/firebase";
 import { Movie } from "@/typings";
+import toast, { Toaster } from "react-hot-toast";
+import { Typography, duration } from "@mui/material";
+import { db } from "@/firebase";
 
 const style = {
-  width: 800,
-  bgcolor: "transparent",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
+  background: "green",
+  color: "white",
+  fontWeight: "bold",
+  fontSize: "16px",
+  padding: "16px",
+  borderRadius: "9999px",
+  maxWidth: "7000px",
 };
 
 export default function BasicModal() {
   const [mute, setMute] = useState(false);
-  const [liked, setLiked] = useState(false);
   const { user } = useFireAuth();
   const [open, setOpen] = useRecoilState(modalState);
   const [Trailer, setTrailer] = useRecoilState(movieState);
@@ -42,11 +46,31 @@ export default function BasicModal() {
       await deleteDoc(
         doc(db, "customers", user!.uid, "MyList", movie?.id.toString()!)
       );
+      toast(
+        `'${
+          movie?.name ||
+          movie?.original_name ||
+          movie?.title ||
+          movie?.original_title
+        }' removed from 'Movies I Liked' list!`,
+        { duration: 3000, style: style }
+      );
+      setAddedToList(false)
     } else {
       await setDoc(
         doc(db, "customers", user!.uid, "MyList", movie?.id.toString()!),
         { ...movie }
       );
+      toast(
+        `'${
+          movie?.name ||
+          movie?.original_name ||
+          movie?.title ||
+          movie?.original_title
+        }' added to 'Movies I Liked' list!`,
+        { duration: 3000, style: style }
+      );
+      setAddedToList(true)
     }
   };
 
@@ -130,6 +154,7 @@ export default function BasicModal() {
                     <FaThumbsUp className="h-5 w-5" />
                   )}
                 </button>
+                <Toaster />
               </div>
             </div>
           </div>

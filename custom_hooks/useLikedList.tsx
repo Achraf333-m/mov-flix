@@ -1,6 +1,6 @@
 import { db } from "@/firebase";
 import { Movie } from "@/typings";
-import { DocumentData, collection, onSnapshot } from "firebase/firestore";
+import { DocumentData, collection, onSnapshot } from "@firebase/firestore";
 import { useEffect, useState } from "react";
 
 function useLikedList(uid: string | undefined) {
