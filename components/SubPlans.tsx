@@ -15,8 +15,6 @@ interface props {
 
 function SubPlans({ products, user }: props) {
   const [selectedPlan, setSelectedPlan] = useState(products[1])
-
-console.log(products)
   return (
     <>
       <Head>
@@ -36,7 +34,7 @@ console.log(products)
             </h1>
             {products.map((product) => (
               <>
-                <div key={product.id} onClick={() => setSelectedPlan(product)} className={`sub_style cursor-pointer ${selectedPlan.priceId === product.priceId ? 'opacity-100 border-[1px] border-green-500 border-s-fuchsia-500 p-10' : 'opacity-70'}`}>
+                <div key={product.id} onClick={() => setSelectedPlan(product)} className={`sub_style cursor-pointer ${selectedPlan.priceId === product.priceId ? 'opacity-100 border-[1px] border-green-500 border-s-fuchsia-500 bg-green-500/5' : 'opacity-70'}`}>
                   <h3>{product.name}</h3>
                   <p className="text-center text-[16px] font-extralight">{product.description}</p>
                   <button className="sub_btn" onClick={() => {createSesh(product?.priceId, user)}}>Purchase Plan</button>
@@ -44,7 +42,6 @@ console.log(products)
               </>
             ))}
           </div>
-          {/* <button onClick={() => createPortalLink(functions)}>portallink</button> */}
         </div>
       </div>
     </>

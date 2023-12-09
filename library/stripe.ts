@@ -6,8 +6,8 @@ import { getFunctions, httpsCallable } from "firebase/functions";
 export async function createSesh(PriceId: string, user: User | null) {
   let checkoutSessionData = {
     price: PriceId,
-    success_url: window.location.origin,
-    cancel_url: window.location.origin,
+    success_url: `${window.location.origin}`,
+    cancel_url: `${window.location.origin}`,
   };
 
   const checkoutSessionRef = await addDoc(
@@ -29,20 +29,22 @@ export async function createSesh(PriceId: string, user: User | null) {
 }
 
 
-const functions = getFunctions(app, "us-central1");
-const createPortalLink = httpsCallable(
-  functions,
-  "ext-firestore-stripe-payments-createPortalLink"
-);
+// firebaseApp is object created using initializeApp()
+// may need to change server location
+export const customerPortal = () => {
+  const functions = getFunctions(app, 'us-central1');
+  const createPortalLink:any = httpsCallable(
+    functions, 
+    'ext-firestore-stripe-payments-createPortalLink');
+  
+  // request Stripe to create a portal link, and redirect user there
+  createPortalLink({
+      returnUrl: window.location.origin // can set this to a custom page
+  }).then((result:any) => {
+      window.location.assign(result?.data.url);
+  }).catch((error:Error) => {
+      // handle error
+      console.log(error)
+  });
 
-// request Stripe to create a portal link, and redirect user there
-// createPortalLink({
-//   returnUrl: window.location.origin, // can set this to a custom page
-// })
-//   .then((result) => {
-//     window.location.assign(result.data?.success_url);
-//     console.log(result);
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//   });
+}

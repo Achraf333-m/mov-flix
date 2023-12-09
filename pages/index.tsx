@@ -12,8 +12,9 @@ import useLikedList from "@/custom_hooks/useLikedList";
 import useSubStatus from "@/custom_hooks/useSubStatus";
 import SubPlans from "@/components/SubPlans";
 import { Product } from "@invertase/firestore-stripe-payments";
-import { query, collection, where, getDocs } from "firebase/firestore";
+import { query, collection, where, getDocs, DocumentData } from "firebase/firestore";
 import { db } from "@/firebase";
+import { useEffect, useState } from "react";
 
 interface props {
   Trending: Movie[];
@@ -39,16 +40,21 @@ function Home({
   products,
 }: props) {
   const { user, loading } = useFireAuth();
+  const [status, setStatus] = useState<DocumentData | null | undefined>()
   const list = useLikedList(user?.uid);
-  const subscription = useSubStatus(user);
+  useEffect(() => {
+    useSubStatus(user).then((res) => setStatus(res));
+  }, [user])
+
 
   if (!user) {
     return null;
   }
-  console.log(subscription)
 
-  if (loading || subscription === null) return null;
-  if (!subscription) return <SubPlans products={products} user={user} />;
+  if (loading || status === undefined) return null;
+  if (!status) return <SubPlans products={products} user={user} />;
+  setTimeout(() => {
+  }, 1000);
 
   return (
     <div className="relative !bg-gradient-to-b box-border ">

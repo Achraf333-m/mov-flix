@@ -1,13 +1,29 @@
 import useFireAuth from "@/custom_hooks/useFireAuth";
+import useSubStatus from "@/custom_hooks/useSubStatus";
+import { customerPortal } from "@/library/stripe";
+import { DocumentData } from "@firebase/firestore";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { ImSpinner2 } from "react-icons/im";
 import { MdArrowBackIos } from "react-icons/md";
 
 function account() {
-  const { signUserOut, loading } = useFireAuth();
+  const { signUserOut, loading, user } = useFireAuth();
+  const [date, setDate] = useState<string | undefined>()
+  const [sub, setSub] = useState<DocumentData | null | undefined>()
   const signOut = async () => {
     await signUserOut();
   };
+  useEffect(() => {
+    useSubStatus(user).then((res) => setSub(res))
+  }, [user])
+
+  
+  useEffect(() => {
+    const dateCreated = new Date(1702096056824 - sub?.items[0].price.product.created)
+    setDate(dateCreated.toString().slice(0, 15))
+
+  }, [sub])
   return (
     <>
       <div className="h-full w-full">
@@ -24,41 +40,6 @@ function account() {
           </div>
           <h1 className="text-5xl text-white/70">My Account</h1>
           <div className="flex justify-evenly space-x-4">
-            <ul className="space-y-4 text-lg underline cursor-pointer text-white/60">
-              <li
-                onClick={() =>
-                  alert("This feature has not been implemented yet")
-                }
-                className="hover:text-white"
-              >
-                My history
-              </li>
-              <li
-                onClick={() =>
-                  alert("This feature has not been implemented yet")
-                }
-                className="hover:text-white"
-              >
-                Personal Information
-              </li>
-              <li
-                onClick={() =>
-                  alert("This feature has not been implemented yet")
-                }
-                className="hover:text-white"
-              >
-                Payments
-              </li>
-              <li
-                onClick={() =>
-                  alert("This feature has not been implemented yet")
-                }
-                className="hover:text-white"
-              >
-                My subscription
-              </li>
-            </ul>
-            <div className="h-52 w-1 bg-white/50 rounded-full"></div>
             <ul className="space-y-4 text-lg cursor-pointer text-white/60">
               <li
                 onClick={() =>
@@ -66,7 +47,7 @@ function account() {
                 }
                 className="hover:text-white underline"
               >
-                My movies
+                My history
               </li>
               <li
                 onClick={() =>
@@ -74,7 +55,6 @@ function account() {
                 }
                 className="hover:text-white underline"
               >
-                Careers
               </li>
               <li
                 onClick={() =>
@@ -82,21 +62,45 @@ function account() {
                 }
                 className="hover:text-white underline"
               >
-                My share list
+                Payments
               </li>
               <li
-                onClick={() =>
-                  alert("This feature has not been implemented yet")
-                }
-                className="hover:text-white underline"
+               
+                className="hover:text-white"
               >
-                My familyFibe
+                Memeber since <h3 className="font-extrabold">{date}</h3>
+              </li>
+            </ul>
+            <div className="h-52 w-1 bg-white/50 rounded-full"></div>
+            <ul className="space-y-4 text-lg cursor-pointer text-white/60">
+              <li
+                className="hover:text-white"
+              >
+                You are on the {sub?.items[0].price.product.name}
+              </li>
+              <li
+  
+                className="hover:text-white"
+              >
+                Download: {sub?.items[0].price.product.metadata.Download === 'True' ? 'Yes, you can download movies and shows' : 'your plan does not include download'}
+              </li>
+              <li
+                
+                className="hover:text-white"
+              >
+                Stream devices: {sub?.items[0].price.product.metadata.Devices}
+              </li>
+              <li
+               
+                className="hover:text-white"
+              >
+                Quality: {sub?.items[0].price.product.metadata.Quality}
               </li>
             </ul>
           </div>
           <div className="flex justify-evenly">
-            <button className="hover:text-white px-4 py-3 mt-10 !no-underline rounded-md  text-white/70 transition-all duration-300 hover:bg-green-700 bg-green-700/90">
-              Cancel Membership
+            <button onClick={customerPortal} className="hover:text-white px-4 py-3 mt-10 !no-underline rounded-md  text-white/70 transition-all duration-300 hover:bg-green-700 bg-green-700/90">
+              Edit Membership
             </button>
             <button
               className="hover:text-white px-4 py-3 mt-10 !no-underline rounded-md  text-white/70 transition-all duration-300 hover:bg-green-700 bg-green-700/90"
