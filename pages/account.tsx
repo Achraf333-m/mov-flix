@@ -40,7 +40,7 @@ function account() {
               <MdArrowBackIos className="text-xl" />
             </Link>
           </div>
-          <h1 className="text-xl md:text-5xl text-white/70 md:text-left text-center">My Account</h1>
+          <h1 className="text-xl md:text-5xl text-white/70 md:text-left flex justify-center items-center text-center">My Account</h1>
           <div className="flex flex-col md:flex-row items-center justify-evenly space-x-4">
             <ul className="space-y-4 text-center text-sm md:text-lg cursor-pointer text-white/60">
               <li
@@ -70,7 +70,7 @@ function account() {
                
                 className="hover:text-white"
               >
-                Memeber since <br /> <h3 className="font-extrabold">{date}</h3>
+                Memeber since <br /> <h3 className="font-extrabold text-center">{date}</h3>
               </li>
             </ul>
             <div className="h-52 w-1 hidden md:block bg-white/50 rounded-full"></div>
@@ -78,25 +78,25 @@ function account() {
               <li
                 className="hover:text-white"
               >
-                You are on the: <br /> <h3 className="font-extrabold">{sub?.items[0].price.product.name}</h3> 
+                You are on the: <br /> <h3 className="font-extrabold text-center">{sub?.items[0].price.product.name}</h3> 
               </li>
               <li
   
                 className="hover:text-white"
               >
-                Download: <br /> <h3 className="font-extrabold">{sub?.items[0].price.product.metadata.Download === 'True' ? 'Yes, you can download movies and shows' : 'your plan does not include download'}</h3>
+                Download: <br /> <h3 className="font-extrabold text-center">{sub?.items[0].price.product.metadata.Download === 'True' ? 'Yes, you can download movies and shows' : 'your plan does not include download'}</h3>
               </li>
               <li
                 
                 className="hover:text-white"
               >
-                Stream devices: <br /> <h3 className="font-extrabold">{sub?.items[0].price.product.metadata.Devices}</h3> 
+                Stream devices: <br /> <h3 className="font-extrabold text-center">{sub?.items[0].price.product.metadata.Devices}</h3> 
               </li>
               <li
                
                 className="hover:text-white"
               >
-                Quality: <br /> <h3 className="font-extrabold">{sub?.items[0].price.product.metadata.Quality}</h3>
+                Quality: <br /> <h3 className="font-extrabold text-center">{sub?.items[0].price.product.metadata.Quality}</h3>
               </li>
             </ul>
           </div>
