@@ -10,7 +10,6 @@ import { FaThumbsUp } from "react-icons/fa";
 import useFireAuth from "@/custom_hooks/useFireAuth";
 import {
   DocumentData,
-  Firestore,
   collection,
   deleteDoc,
   doc,
@@ -19,7 +18,6 @@ import {
 } from "firebase/firestore";
 import { Movie } from "@/typings";
 import toast, { Toaster } from "react-hot-toast";
-import { Typography, duration } from "@mui/material";
 import { db } from "@/firebase";
 
 const style = {

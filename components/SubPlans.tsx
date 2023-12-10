@@ -1,13 +1,8 @@
 import { Product } from "@invertase/firestore-stripe-payments";
 import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { MdCheckCircleOutline } from "react-icons/md";
 import { useState } from "react";
-import useFireAuth from "@/custom_hooks/useFireAuth";
 import { createSesh } from "@/library/stripe";
 import { User } from "firebase/auth";
-import { ImSpinner2 } from "react-icons/im";
 
 interface props {
   products: Product[];
