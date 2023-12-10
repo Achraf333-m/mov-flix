@@ -22,7 +22,7 @@ function account() {
 
   
   useEffect(() => {
-    const dateCreated = new Date(1702096056824 - sub?.items[0].price.product.created)
+    const dateCreated = new Date(sub?.current_period_start.seconds * 1000)
     setDate(dateCreated.toString().slice(0, 15))
 
   }, [sub])
