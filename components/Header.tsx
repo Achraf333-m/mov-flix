@@ -35,14 +35,14 @@ function Header() {
       <div className="flex items-center justify-around space-x-4 w-full">
         <Link href="/">
           <Image
-            className="h-auto w-auto cursor-pointer"
+            className="h-10 w-auto cursor-pointer"
             src={logo}
             width={100}
             height={100}
             alt="logo"
           />
         </Link>
-        <ul className="flex space-x-4">
+        <ul className="hidden md:flex space-x-4">
           <li onClick={() => alert('This feature has not been implemented yet :D')} className="nav-link">Movies</li>
           <li onClick={() => alert('This feature has not been implemented yet :D')} className="nav-link">Series</li>
           <li onClick={() => alert('This feature has not been implemented yet :D')} className="nav-link">Documentaries</li>

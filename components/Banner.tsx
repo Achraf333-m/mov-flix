@@ -18,7 +18,7 @@ function Banner({ Trending }: props) {
   const [movieTrailer, setmovieTrailer] = useRecoilState(movieState);
   const [videoState, setVideoState] = useRecoilState(VideoState);
   const show_trailer = async () => {
-    const data = await trailer(Movie?.id!, Movie?.media_type);
+    const data = await trailer(Movie?.id!, Movie?.first_air_date);
     setmovieTrailer(data);
     setVideoState(Movie);
   };
@@ -30,7 +30,7 @@ function Banner({ Trending }: props) {
   }, [Trending]);
 
   return (
-    <div className="flex flex-col py-16 space-y-2 mb-10 md:justify-end md:space-y-4 lg:h-[85vh] lg:pb-12">
+    <div className="flex flex-col pt-10 xl:py-16 space-y-2 mb-4 xl:mb-10 md:justify-end md:space-y-4 lg:h-[85vh] lg:pb-12">
       <figure className="absolute top-0 left-0 h-[95vh] w-full -z-10">
        {Movie && ( <img
           className=" opacity-50 object-cover -z-10"
@@ -39,8 +39,8 @@ function Banner({ Trending }: props) {
         />)}
       </figure>
 
-      <div className=" flex justify-center items-center max-w-md flex-col space-y-6">
-        <h1 className="text-[50px] font-light text-center">
+      <div className=" flex justify-center pt-10 items-center max-w-md flex-col space-y-6">
+        <h1 className="text-xl sm:text-3xl p-2 md:text-[50px] max-w-2xl md:max-w-7xl font-light text-center">
           {Movie?.title || Movie?.original_name}
         </h1>
         <div className="flex space-x-4">
@@ -59,7 +59,7 @@ function Banner({ Trending }: props) {
             Trailer
           </button>
         </div>
-        <div className="flex max-w-md space-x-4">
+        <div className="md:flex max-w-md hidden space-x-4">
           <h3 className="flex justify-center space-x-2 text-lg text-green-500">
             {Movie && Math.floor(Movie?.popularity)}
             <LuPopcorn className="w-4 h-4  md:h-7 md:w-7" />
@@ -68,7 +68,7 @@ function Banner({ Trending }: props) {
             {Movie && Math.floor(Movie?.vote_count / 100)} watchers
           </h3>
         </div>
-        <p className="text-center max-w-xs font-extralight text-lg text-ellipsis">
+        <p className="hidden sm:block text-center max-w-xs font-extralight text-lg text-ellipsis">
           {Movie?.overview.substring(0, 200).concat("....")}
         </p>
       </div>

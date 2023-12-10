@@ -25,9 +25,9 @@ function Row({ Movies, title }: props) {
 
   return (
     <div className="max-h-60 w-full space-y-0.5 md:space-y-4 flex-shrink ">
-      <h2 className="font-light text-3xl ml-[156px]">{title}</h2>
-      <div className="flex space-x-24">
-        <div className="hidden md:flex px-8 justify-center space-x-28">
+      <h2 className="font-light text-lg md:text-3xl md:ml-[156px]">{title}</h2>
+      <div className="flex md:space-x-24">
+        <div className="hidden md:flex md:px-8 justify-center md:space-x-28">
           <button className="arRow" onClick={() => rowMoved("left")}>
             <BsChevronLeft />
           </button>
@@ -37,7 +37,7 @@ function Row({ Movies, title }: props) {
         </div>
         <div
           ref={movedRef}
-          className="flex space-x-2 overflow-x-scroll scrollbar-hide items-center"
+          className="flex overflow-x-scroll space-x-0.5 scrollbar-hide items-center md:space-x-2.5 md:p-2"
         >
           {Movies.map((original:Movie) => (
             <Thumbnail Movie={original} key={original.id} />

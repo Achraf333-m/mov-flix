@@ -2,6 +2,7 @@ import app, { db } from "@/firebase";
 import { User } from "firebase/auth";
 import { addDoc, collection, onSnapshot } from "firebase/firestore";
 import { getFunctions, httpsCallable } from "firebase/functions";
+import { useState } from "react";
 
 export async function createSesh(PriceId: string, user: User | null) {
   let checkoutSessionData = {
@@ -39,7 +40,7 @@ export const customerPortal = () => {
   
   // request Stripe to create a portal link, and redirect user there
   createPortalLink({
-      returnUrl: window.location.origin // can set this to a custom page
+      returnUrl: window.location.origin 
   }).then((result:any) => {
       window.location.assign(result?.data.url);
   }).catch((error:Error) => {

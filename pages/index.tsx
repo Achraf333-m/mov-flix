@@ -12,7 +12,13 @@ import useLikedList from "@/custom_hooks/useLikedList";
 import useSubStatus from "@/custom_hooks/useSubStatus";
 import SubPlans from "@/components/SubPlans";
 import { Product } from "@invertase/firestore-stripe-payments";
-import { query, collection, where, getDocs, DocumentData } from "firebase/firestore";
+import {
+  query,
+  collection,
+  where,
+  getDocs,
+  DocumentData,
+} from "firebase/firestore";
 import { db } from "@/firebase";
 import { useEffect, useState } from "react";
 
@@ -40,12 +46,11 @@ function Home({
   products,
 }: props) {
   const { user, loading } = useFireAuth();
-  const [status, setStatus] = useState<DocumentData | null | undefined>()
+  const [status, setStatus] = useState<DocumentData | null | undefined>();
   const list = useLikedList(user?.uid);
   useEffect(() => {
     useSubStatus(user).then((res) => setStatus(res));
-  }, [user])
-
+  }, [user]);
 
   if (!user) {
     return null;
@@ -53,8 +58,6 @@ function Home({
 
   if (loading || status === undefined) return null;
   if (!status) return <SubPlans products={products} user={user} />;
-  setTimeout(() => {
-  }, 1000);
 
   return (
     <div className="relative !bg-gradient-to-b box-border ">
@@ -64,7 +67,7 @@ function Home({
       <Header />
       <main className="px-4 lg:space-y-16 lg:px-8 relative pb-24">
         <Banner Trending={Trending} />
-        <section className="md:pl-10">
+        <section className="ml-4 md:pl-10">
           <Row title="MovieFLix Originals" Movies={Originals} />
           <Row title="Top Rated Movies" Movies={TopRated} />
           {list.length > 0 && <Row title="Movies I liked" Movies={list} />}

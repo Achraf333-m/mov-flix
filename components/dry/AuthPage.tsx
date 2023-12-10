@@ -58,6 +58,7 @@ function AuthPage({ title }: props) {
             {errors.password && (<h3 className="font-extralight text-red-500 text-md w-full text-center max-w-md">Please enter a valid password</h3>)}
             
           <button
+          disabled={loading && true}
             type="submit"
             onClick={handleSubmit(formSubmit)}
             className="px-4 py-3 flex justify-center items-center rounded-md w-full text-white/90 hover:text-white transition-all duration-300 hover:bg-green-600 bg-green-600/90"

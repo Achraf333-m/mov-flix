@@ -105,11 +105,12 @@ export default function BasicModal() {
       <Modal
         open={open}
         onClose={handleClose}
+        sx={{padding: '20px', borderRadius: '50px'}}
         className="flex justify-center items-center"
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box className="rounded-md relative h-[500px] w-[800px] flex justify-center bg-green-900/60 overflow-hidden border-2 border-green-900">
+        <Box className="rounded-md relative h-[300px] sm:h-[500px] w-[800px] flex justify-center bg-green-900/60 overflow-hidden border-2 border-green-900">
           <ReactPlayer
             width="100%"
             height="100%"
@@ -127,14 +128,14 @@ export default function BasicModal() {
           <div className="absolute py-24 px-10 bottom-0 right-0 z-10 left-0">
             <div className="flex items-center justify-between">
               <div className="flex flex-col space-y-2">
-                <h1 className="italic text-3xl font-extrabold text-green-600">
+                <h1 className="italic text-lg md:text-3xl font-extrabold text-green-600">
                   {movie?.title ||
                     movie?.name ||
                     movie?.original_title ||
                     movie?.original_name}
                 </h1>
-                <h3 className="font-extrabold italic text-green-300">
-                  {movie?.release_date}
+                <h3 className="font-extrabold italic text-sm md:text-xl text-green-300">
+                  {movie?.release_date || movie?.first_air_date}
                 </h3>
               </div>
               <div className="flex justify-end items-center space-x-8">
